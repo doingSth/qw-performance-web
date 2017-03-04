@@ -1,0 +1,19 @@
+{
+	"db":{
+		"beta":{
+			"host": "10.1.77.106",
+	        "port": "3306",
+	        "user": "f2eleoric",
+	        "password": "dp!@xqE2AxoEw",
+	        "database": "F2eLeoric"
+		},
+		"product":{
+
+		}
+	},
+	"user":{
+		"beta":"http://develop.sso.test.sankuai.info",
+		"ppe":"http://develop.sso.test.sankuai.info",
+		"product":"https://sso.sankuai.com"
+	}
+}
