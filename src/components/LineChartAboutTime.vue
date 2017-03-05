@@ -9,9 +9,13 @@ export default {
   watch: {
   },
   data () {
-    var that = this
     return {
-      polar: {
+    }
+  },
+  props: ['title', 'chartDataName', 'chartData'],
+  computed: {
+    polar: function () {
+      return {
           title: {
               text: this.title
           },
@@ -34,15 +38,13 @@ export default {
       }
     }
   },
-  props: ['title', 'chartDataName', 'chartData'],
-  computed: {
-  },
   beforeMount () {
   },
   components: {
     chart: ECharts
   },
   methods: {
+
   }
 }
 </script>

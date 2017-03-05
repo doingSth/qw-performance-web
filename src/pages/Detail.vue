@@ -1,70 +1,43 @@
 <template>
   <div>
-    <lineChartAboutTime title='请求量' chartDataName='请求量' :chartData='chartData'>
+    <lineChartAboutTime title='页面访问量（次）' chartDataName='请求量' :chartData='pvList'>
+    </lineChartAboutTime>
+    <lineChartAboutTime title='页面总加载时间（毫秒）' chartDataName='加载时间' :chartData='loadList'>
+    </lineChartAboutTime>
+    <lineChartAboutTime title='白屏时间（毫秒）' chartDataName='白屏时间' :chartData='paintList'>
+    </lineChartAboutTime>
+    <lineChartAboutTime title='可交互时间（毫秒）' chartDataName='可交互时间' :chartData='interactiveList'>
+    </lineChartAboutTime>
+    <lineChartAboutTime title='首字节时间（毫秒）' chartDataName='首字节时间' :chartData='ttfbList'>
     </lineChartAboutTime>
   </div>
 
 </template>
 <script>
 import LineChartAboutTime from '../components/LineChartAboutTime.vue'
+import { mapState } from 'vuex'
 export default {
   name: 'pageList',
   watch: {
-    '$route.params': function (to, from) {
-    }
+
   },
   data () {
     var that = this
     return {
-      chartData:(function () {
-                var d = [];
-                var len = 0;
-                var now = new Date();
-                var value;
-                while (len++ < 200) {
-                    d.push([
-                        new Date(2014, 9, 1, 0, len * 10000).getTime(),
-                        (Math.random()*30).toFixed(2) - 0
-                    ]);
-                }
-                return d;
-            })(),
-      polar: {
-          title: {
-              text: '总请求量'
-          },
-          color: ['#20a0ff'],
-          tooltip: {},
-          legend: {
-              data:['请求量']
-          },
-          xAxis: {
-              'type':'time',
-              'splitNumber':7
-          },
-          yAxis: {
-          },
-          series: [{
-              name: '请求量',
-              type: 'line',
-              data: (function () {
-                var d = [];
-                var len = 0;
-                var now = new Date();
-                var value;
-                while (len++ < 200) {
-                    d.push([
-                        new Date(2014, 9, 1, 0, len * 10000).getTime(),
-                        (Math.random()*30).toFixed(2) - 0
-                    ]);
-                }
-                return d;
-            })()
-          }]
-      }
+      data: [[1488473280000,1]]
     }
   },
   computed: {
+    text () {
+      return 'text'
+    },
+    ...mapState({
+      pvList:state => state.page.pvList,
+      loadList:state => state.page.loadList,
+      interactiveList:state => state.page.interactiveList,
+      paintList:state => state.page.paintList,
+      ttfbList:state => state.page.ttfbList
+    })
   },
   beforeMount () {
   },
@@ -79,8 +52,4 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" scoped>
   @import "../less/base.less";
-  .echarts{
-    width:100%;
-    height: 500px;
-  }
 </style>
