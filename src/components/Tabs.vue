@@ -1,6 +1,6 @@
 <template>
   <el-tabs v-model="active" type="card">
-    <el-tab-pane v-for="tab in list" :label="tab.label" :name="tab.name"></el-tab-pane>
+    <el-tab-pane v-for="tab in list" :label="tab.label || tab.name || tab.url" :name="tab.id || tab.name"></el-tab-pane>
   </el-tabs>
 </template>
 <script>

@@ -16,8 +16,11 @@ let fetchRequest = function (url, options) {
   })
 }
 module.exports = {
-  queryDataDto: function (paramse) {
-    return fetchRequest(urlUtil.queryDataDto+"?"+qs.stringify(paramse))
+  queryDataDto: function (params) {
+    return fetchRequest(urlUtil.queryDataDto+"?"+qs.stringify(params))
+  },
+  queryUrlList: function () {
+    return fetchRequest(urlUtil.queryUrlList)
   },
   savePage: function (params) {
     //return fetchRequest(urlUtil.savePage, {

@@ -14,16 +14,6 @@ import dateformat from 'dateformat'
 module.exports = {
   state: {
     pageList:[
-      {
-      'label': "appPageName",
-      'app': "appPageName",
-      'name': '0'
-      },
-      {
-        'label': "appPageName2",
-        'app': "appPageName2",
-        'name': '1'
-      }
     ],
     unitTimeMap: {
       '1H': 60,
@@ -53,12 +43,21 @@ module.exports = {
     },
     changeValue (state, payload) {
       setPath(state,payload.path,payload.value)
+    },
+    setUrlList (state, payload) {
+      Vue.set(state, 'pageList', payload)
     }
   },
   actions: {
     queryDataDto (context, payload) {
       request.queryDataDto(payload.params).then(json => {
         context.commit('setList', json)
+      })
+    },
+    queryUrlList (context, payload) {
+      request.queryUrlList().then(json => {
+        context.commit('setUrlList', json)
+        payload.cb && payload.cb()
       })
     }
   },

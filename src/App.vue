@@ -21,7 +21,12 @@ export default {
     }
   },
   beforeMount () {
-    this.query()
+    var that = this
+    this.$store.dispatch('queryUrlList', {
+      cb: () =>{
+        that.query()
+      }
+    })
   },
   mounted () {
   },
@@ -64,9 +69,9 @@ export default {
       var activePageIndex = this.$store.state.page.activePageIndex
       var unitTimeMap = this.$store.state.page.unitTimeMap
       var queryObj = this.$store.state.page.query
-      var app = pageList[activePageIndex].app
+      var app = pageList[activePageIndex]&&pageList[activePageIndex].id
       var params = {
-        app: app,
+        urlId: app,
         beginTimeStr: queryObj.beginTimeStr,
         endTimeStr: queryObj.endTimeStr,
         unitTimeAboutMinutes: unitTimeMap[queryObj.unitTime]
