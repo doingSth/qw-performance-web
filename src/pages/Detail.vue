@@ -1,14 +1,16 @@
 <template>
   <div>
-    <lineChartAboutTime title='页面访问量（次）' chartDataName='请求量' :chartData='pvList'>
+    <lineChartAboutTime v-if='showPage' title='页面访问量（次）' chartDataName='请求量' :chartData='pvList'>
     </lineChartAboutTime>
-    <lineChartAboutTime title='页面总加载时间（毫秒）' chartDataName='加载时间' :chartData='loadList'>
+    <lineChartAboutTime v-if='showPage' title='页面总加载时间（毫秒）' chartDataName='加载时间' :chartData='loadList'>
     </lineChartAboutTime>
-    <lineChartAboutTime title='白屏时间（毫秒）' chartDataName='白屏时间' :chartData='paintList'>
+    <lineChartAboutTime v-if='showPage' title='白屏时间（毫秒）' chartDataName='白屏时间' :chartData='paintList'>
     </lineChartAboutTime>
-    <lineChartAboutTime title='可交互时间（毫秒）' chartDataName='可交互时间' :chartData='interactiveList'>
+    <lineChartAboutTime v-if='showPage' title='可交互时间（毫秒）' chartDataName='可交互时间' :chartData='interactiveList'>
     </lineChartAboutTime>
-    <lineChartAboutTime title='首字节时间（毫秒）' chartDataName='首字节时间' :chartData='ttfbList'>
+    <lineChartAboutTime v-if='showPage' title='首字节时间（毫秒）' chartDataName='首字节时间' :chartData='ttfbList'>
+    </lineChartAboutTime>
+    <lineChartAboutTime v-if='!showPage' title='自动上报数据均值' chartDataName='自动上报时间' :chartData='timeList'>
     </lineChartAboutTime>
   </div>
 
@@ -36,9 +38,11 @@ export default {
       loadList:state => state.page.loadList,
       interactiveList:state => state.page.interactiveList,
       paintList:state => state.page.paintList,
-      ttfbList:state => state.page.ttfbList
+      ttfbList:state => state.page.ttfbList,
+      timeList:state => state.page.timeList
     })
   },
+  props:['showPage'],
   beforeMount () {
   },
   components: {

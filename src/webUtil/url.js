@@ -3,11 +3,15 @@
  */
 var url = {
   'queryDataDto': '/performance/queryDataAboutLineChart',
-  'queryUrlList': '/performance/queryUrlList'
+  'queryPersonalDataDto': '/performance/queryPersonalDataAboutLineChart',
+  'queryUrlList': '/performance/queryUrlList',
+  'queryKeyList': '/performance/queryKeyList'
 }
 var textUrl = {
   'queryDataDto': 'http://localhost:8080/performance/queryDataAboutLineChart',
-  'queryUrlList': 'http://localhost:8080/performance/queryUrlList'
+  'queryPersonalDataDto': 'http://localhost:8080/performance/queryPersonalDataAboutLineChart',
+  'queryUrlList': 'http://localhost:8080/performance/queryUrlList',
+  'queryKeyList': 'http://localhost:8080/performance/queryKeyList'
 }
 if (window.location.href.indexOf('localhost') > -1) {
   url = textUrl

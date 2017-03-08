@@ -34,6 +34,9 @@
       var query = this.$store.state.page.query
       return {
         pickerOptions2: {
+          disabledDate (time) {
+            return time.getTime() > Date.now()
+          },
           shortcuts: [{
             text: '最近一周',
             onClick(picker) {

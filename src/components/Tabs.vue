@@ -1,6 +1,6 @@
 <template>
   <el-tabs v-model="active" type="card">
-    <el-tab-pane v-for="tab in list" :label="tab.label || tab.name || tab.url" :name="tab.id || tab.name"></el-tab-pane>
+    <el-tab-pane v-for="tab in list" :label="tab.label || tab.name || tab.url || tab.key" :name="tab.id || tab.name"></el-tab-pane>
   </el-tabs>
 </template>
 <script>
@@ -12,7 +12,7 @@
     },
     props: {
       'list': Array,
-      'activeName': String,
+      'activeName': {},
       'onChange': Function
     },
     watch: {
@@ -20,7 +20,11 @@
         this.onChange(value)
       },
       'activeName': function (v) {
-        this.active = v
+        if(v != this.active){
+          this.active = v
+        }
+      },
+      'list': function(v){
       }
     },
     methods: {

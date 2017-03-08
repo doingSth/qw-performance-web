@@ -15,6 +15,8 @@ module.exports = {
   state: {
     pageList:[
     ],
+    keyList:[
+    ],
     unitTimeMap: {
       '1H': 60,
       '1D': 24*60,
@@ -25,12 +27,13 @@ module.exports = {
       endTimeStr: dateformat(now, 'yyyy-mm-dd HH:MM:00'),
       unitTime: '1H'
     },
-    activePageIndex: '0',
+    activeName: '',
     pvList:[],
     loadList:[],
     interactiveList:[],
     ttfbList:[],
-    paintList:[]
+    paintList:[],
+    timeList:[]
   },
   mutations: {
     setList (state, payload) {
@@ -39,13 +42,30 @@ module.exports = {
       Vue.set(state, 'interactiveList', dataToLineChart(payload.interactiveList))
       Vue.set(state, 'ttfbList', dataToLineChart(payload.ttfbList))
       Vue.set(state, 'paintList', dataToLineChart(payload.paintList))
-      console.warn(JSON.stringify(state.pvList))
+    },
+    setTimeList (state, payload) {
+      Vue.set(state, 'timeList', dataToLineChart(payload.timeList))
     },
     changeValue (state, payload) {
       setPath(state,payload.path,payload.value)
     },
     setUrlList (state, payload) {
+      payload = payload&&payload.map(item=>{
+        item.id = `${item.id}`
+        return item
+      })
+      state.activeName = payload && `${payload[0].id}`
+      console.warn('state.activeName' )
+      console.warn(typeof  state.activeName )
+      console.warn(state.activeName )
       Vue.set(state, 'pageList', payload)
+    },
+    setKeyList (state, payload) {
+      payload = payload&&payload.map(item=>{
+        item.id = `${item.id}`
+        return item
+      })
+      Vue.set(state, 'keyList', payload)
     }
   },
   actions: {
@@ -54,10 +74,21 @@ module.exports = {
         context.commit('setList', json)
       })
     },
+    queryPersonalDataDto (context, payload) {
+      request.queryPersonalDataDto(payload.params).then(json => {
+        context.commit('setTimeList', json)
+      })
+    },
     queryUrlList (context, payload) {
       request.queryUrlList().then(json => {
         context.commit('setUrlList', json)
-        payload.cb && payload.cb()
+        payload && payload.cb && payload.cb()
+      })
+    },
+    queryKeyList (context, payload) {
+      request.queryKeyList().then(json => {
+        context.commit('setKeyList', json)
+        payload && payload.cb && payload.cb()
       })
     }
   },

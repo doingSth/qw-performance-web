@@ -19,8 +19,14 @@ module.exports = {
   queryDataDto: function (params) {
     return fetchRequest(urlUtil.queryDataDto+"?"+qs.stringify(params))
   },
+  queryPersonalDataDto: function (params) {
+    return fetchRequest(urlUtil.queryPersonalDataDto+"?"+qs.stringify(params))
+  },
   queryUrlList: function () {
     return fetchRequest(urlUtil.queryUrlList)
+  },
+  queryKeyList: function () {
+    return fetchRequest(urlUtil.queryKeyList)
   },
   savePage: function (params) {
     //return fetchRequest(urlUtil.savePage, {
